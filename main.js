@@ -85,14 +85,37 @@ function displayItems() {
             pTagSeverity.textContent = 'Severity: ' + itemSeverity;
             pTagSeverity.style = 'color: red;'
 
+            // Add a button for deletion
+            deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', function() {
+                deleteItem(itemID)}
+                )
+
             // Append Children to wish_list
             wish_list.appendChild(h2TagName);
             wish_list.appendChild(smallTagID);
             wish_list.appendChild(pTagLink);
             wish_list.appendChild(pTagMessage);
             wish_list.appendChild(pTagSeverity);
+            wish_list.appendChild(deleteButton);
 
         }
     }
 
 }
+
+function deleteItem (id) {
+    var items_array = JSON.parse(localStorage.getItem('items_array'));
+
+    for(var i = 0; i < items_array.length; i++) {
+      if (items_array[i].id == id) {
+        items_array.splice(i, 1);
+      }
+    }
+    
+    localStorage.setItem('items_array', JSON.stringify(items_array));
+    
+    displayItems();
+  }
+  
